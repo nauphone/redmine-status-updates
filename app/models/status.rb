@@ -6,7 +6,10 @@ class Status < ActiveRecord::Base
   extend StatusesHelper
   
   attr_protected :project_id
-  
+
+  acts_as_activity_provider :type => 'statuses', :find_options => {:include => [:project, :user]},
+                            :author_key => :user_id
+
   Hashtag = /(#\S+)/
 
   named_scope :for_project, lambda {|project|
@@ -106,5 +109,34 @@ class Status < ActiveRecord::Base
     end
 
     cloud
+  end
+
+  # Activity methods
+
+  def event_datetime
+    self.created_at.to_time
+  end
+
+  def event_date
+    self.created_on
+  end
+
+  def event_type
+    'status'
+  end
+
+  def event_title
+    I18n.t 'activity_user_updated_his_status', {
+      :user_name => self.user.name,
+      :project_name => self.project.name
+    }
+  end
+
+  def event_url
+    { :controller => 'statuses', :action => 'index', :id => self.project }
+  end
+
+  def event_description
+    self.message
   end
 end

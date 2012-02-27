@@ -17,3 +17,11 @@
 #tag_cloud .bank8 {font-size: 1.6em;}
 #tag_cloud .bank9 {font-size: 1.8em;}
 #tag_cloud .bank10 {font-size: 2.0em;}
+#activity .status {
+  margin-bottom: 0px;
+  padding-left: 20px;
+  line-height: 18px;
+  background-image: url(/images/message.png);
+  background-position: 0 50%;
+  background-repeat: no-repeat;
+}

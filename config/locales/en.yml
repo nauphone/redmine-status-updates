@@ -13,3 +13,5 @@ en:
   redmine_status_all_status_plural: "All statuses"
   redmine_status_tag_cloud: Tag Cloud
   redmine_status_search_statuses: Search statuses
+  label_status_plural: Statuses
+  activity_user_updated_his_status: "%{user_name} has updated his status on project \"%{project_name}\""

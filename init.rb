@@ -5,6 +5,7 @@ require 'dispatcher'
 require 'status_user_patch'
 
 Dispatcher.to_prepare do
+  require_dependency 'principal'
   User.send(:include, ::Plugin::Status::User)
   ActiveRecord::Base.observers << :status_observer
 end
@@ -27,3 +28,4 @@ Redmine::Plugin.register :redmine_status do
   menu :top_menu, "Status Updates", :controller => 'statuses', :action => 'index', :id => nil, :caption => :redmine_status_title
   menu :project_menu, "Status Updates", :controller => 'statuses', :action => 'index', :caption => :redmine_status_title
 end
+Redmine::Activity.register :statuses
